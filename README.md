@@ -1,16 +1,20 @@
 ﻿About this fork
 ===============
 
-This is a stripped version of CyberShadow's ae graphics module (http://blog.thecybershadow.net/2014/03/21/functional-image-processing-in-d/), introduced here. I wanted this graphics package to be easily available through DUB to build upon it.
+This is a stripped version of CyberShadow's ae graphics module introduced here:
+http://blog.thecybershadow.net/2014/03/21/functional-image-processing-in-d/
+
+I wanted this graphics package to be easily available through DUB to build upon it.
 
 **For better or worse**, this fork happened because modifying ae to be used as a DUB package was deemed difficult (one of the main problem being that DUB is ill-suited for projects that follow a git sub-modules structure, without import/source sub-durectory. This makes source and imports paths leak).
 
 Find everything about the whole ae library here: https://github.com/CyberShadow/ae
+If you prefer managing D projects with git submodules, it will be easier to use the original library.
 
 What was removed:
-- everything not related to the graphics package
-- SDL image import to avoid a Derelict dependencies(TODO re-enable this through optional DUB dependencies)
-- GDI+ module which is Win32-specific (but likewise it could be included)
+- Everything unrelated to the graphics package.
+- SDL image import to avoid a Derelict dependencies (TODO re-enable this through optional DUB dependencies).
+- GDI+ module which is Win32-specific (but like-wise it could be included back).
 
 License
 =======
