@@ -1,5 +1,5 @@
 /**
- * Drawing functions.
+ * Package import shortcut.
  *
  * License:
  *   This Source Code Form is subject to the terms of
