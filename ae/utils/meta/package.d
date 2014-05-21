@@ -14,7 +14,3 @@
 module ae.utils.meta;
 
 public import ae.utils.meta.misc;
-//public import ae.utils.meta.reference;
-//public import ae.utils.meta.proxy;
-//public import ae.utils.meta.binding_v1;
-//public import ae.utils.meta.binding;
