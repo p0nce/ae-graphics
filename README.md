@@ -13,8 +13,8 @@ If you prefer managing D projects with git submodules, it will be easier to use 
 
 What was removed:
 - Everything unrelated to the graphics package.
-- SDL image import to avoid a Derelict dependencies (TODO re-enable this through optional DUB dependencies).
-- GDI+ module which is Win32-specific (but like-wise it could be included back).
+- SDL image import to avoid a Derelict dependency (TODO re-enable this through optional DUB dependencies).
+- GDI+ module which is Win32-specific (like-wise it could be included back, but Win32 bindings are not DUBified).
 
 License
 =======
