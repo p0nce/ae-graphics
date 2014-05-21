@@ -1,0 +1,15 @@
+{
+    "name": "ae-graphics",
+    "description": "CyberShadow's AE graphics module in a stripped form.",
+    "homepage": "https://github.com/p0nce/ae-graphics",
+    "license": "MPL-2.0",
+
+    "targetType": "library",
+
+    "authors": [
+        "Vladimir Panteleev (CyberShadow)"
+    ],
+
+    "sourcePaths": [ "." ],
+    "importPaths": [ "." ]
+}
