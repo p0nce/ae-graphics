@@ -7,7 +7,7 @@
     "targetType": "library",
 
     "authors": [
-        "Vladimir Panteleev (CyberShadow)"
+        "CyberShadow (Vladimir Panteleev)"
     ],
 
     "sourcePaths": [ "." ],
