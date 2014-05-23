@@ -20,8 +20,6 @@ License
 =======
 
 This library is licensed under the [Mozilla Public License, v. 2.0](http://mozilla.org/MPL/2.0/).
-Some modules may have a different license (e.g. public domain); check the comments at the top of each module for details.
-You can generally expect the library to be GPL-compatible.
 
 Warning
 =======
