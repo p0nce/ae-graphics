@@ -1,6 +1,6 @@
 {
     "name": "ae-graphics",
-    "description": "CyberShadow's AE graphics module in a stripped form.",
+    "description": "CyberShadow's AE graphics module in a stripped form. A generic abstraction for D image libraries.",
     "homepage": "https://github.com/p0nce/ae-graphics",
     "license": "MPL-2.0",
 
