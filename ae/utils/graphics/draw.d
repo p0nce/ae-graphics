@@ -13,12 +13,13 @@
 
 module ae.utils.graphics.draw;
 
+import std.algorithm : sort;
 import std.traits;
 
 import ae.utils.geometry : TAU;
 import ae.utils.graphics.view;
 import ae.utils.math;
-import ae.utils.meta.misc;
+import ae.utils.meta : structFields, SignedBitsType, UnsignedBitsType;
 
 version(unittest) import ae.utils.graphics.image;
 
@@ -359,7 +360,7 @@ void fillPoly(V, COLOR)(auto ref V v, Coord[] coords, COLOR f)
 		}
 
 		assert(intersections.length % 2==0);
-		intersections.sort;
+		intersections.sort();
 		for (uint i=0; i<intersections.length; i+=2)
 			v.hline!true(intersections[i], intersections[i+1], y, f);
 	}
