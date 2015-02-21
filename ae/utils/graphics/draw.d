@@ -360,7 +360,7 @@ void fillPoly(V, COLOR)(auto ref V v, Coord[] coords, COLOR f)
 		}
 
 		assert(intersections.length % 2==0);
-		intersections.sort();
+		std.algorithm.sort(intersections);
 		for (uint i=0; i<intersections.length; i+=2)
 			v.hline!true(intersections[i], intersections[i+1], y, f);
 	}
