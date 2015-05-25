@@ -16,6 +16,7 @@ module ae.utils.graphics.ffmpeg;
 import std.exception;
 import std.typecons;
 
+import ae.utils.graphics.bitmap;
 import ae.utils.graphics.color;
 import ae.utils.graphics.image;
 
@@ -53,7 +54,13 @@ private struct VideoStreamImpl
 		if (done)
 			wait(pipes.pid);
 		else
-			kill(pipes.pid);
+		{
+			if (!tryWait(pipes.pid).terminated)
+				try
+					kill(pipes.pid);
+				catch (ProcessException e)
+					wait(pipes.pid);
+		}
 	}
 
 	private void initialize(string fn)

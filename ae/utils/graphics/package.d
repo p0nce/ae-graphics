@@ -18,4 +18,5 @@ public import ae.utils.graphics.color,
               ae.utils.graphics.gamma,
               ae.utils.graphics.hls,
               ae.utils.graphics.image,
+              ae.utils.graphics.bitmap,
               ae.utils.graphics.view;

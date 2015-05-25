@@ -103,17 +103,25 @@ struct Color(FieldTuple...)
 
 	/// Construct an RGB color from a typical hex string.
 	static if (is(typeof(this.r) == ubyte) && is(typeof(this.g) == ubyte) && is(typeof(this.b) == ubyte))
-	static typeof(this) fromHex(in char[] s)
 	{
-		import std.conv;
-		import std.exception;
+		static typeof(this) fromHex(in char[] s)
+		{
+			import std.conv;
+			import std.exception;
 
-		enforce(s.length == 6, "Invalid color string");
-		typeof(this) c;
-		c.r = s[0..2].to!ubyte(16);
-		c.g = s[2..4].to!ubyte(16);
-		c.b = s[4..6].to!ubyte(16);
-		return c;
+			enforce(s.length == 6, "Invalid color string");
+			typeof(this) c;
+			c.r = s[0..2].to!ubyte(16);
+			c.g = s[2..4].to!ubyte(16);
+			c.b = s[4..6].to!ubyte(16);
+			return c;
+		}
+
+		string toHex() const
+		{
+			import std.string;
+			return format("%02X%02X%02X", r, g, b);
+		}
 	}
 
 	/// Warning: overloaded operators preserve types and may cause overflows
@@ -194,7 +202,7 @@ struct Color(FieldTuple...)
 	}
 
 	/// Sum of all channels
-	ExpandNumericType!(ChannelType, ilog2(nextPowerOfTwo(channels))) sum()
+	ExpandIntegerType!(ChannelType, ilog2(nextPowerOfTwo(channels))) sum()
 	{
 		typeof(return) result;
 		foreach (i, f; this.tupleof)
@@ -274,6 +282,11 @@ unittest
 	assert(r ==  LA(100, 255), text(r));
 }
 
+unittest
+{
+	Color!(real, "r", "g", "b") c;
+}
+
 /// Obtains the type of each channel for homogenous colors.
 template ChannelType(T)
 {
@@ -300,6 +313,15 @@ template ChangeChannelType(COLOR, T)
 
 static assert(is(ChangeChannelType!(RGB, ushort) == RGB16));
 static assert(is(ChangeChannelType!(int, ushort) == ushort));
+
+/// Wrapper around ExpandNumericType to only expand numeric types.
+template ExpandIntegerType(T, size_t bits)
+{
+	static if (is(T:real))
+		alias ExpandIntegerType = T;
+	else
+		alias ExpandIntegerType = ExpandNumericType!(T, bits);
+}
 
 alias ExpandChannelType(COLOR, int BYTES) =
 	ChangeChannelType!(COLOR,

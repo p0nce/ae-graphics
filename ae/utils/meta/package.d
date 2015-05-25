@@ -22,7 +22,9 @@ public import ae.utils.meta.binding;
 // ************************************************************************
 
 import std.algorithm;
+import std.range;
 import std.traits;
+import std.typetuple;
 
 /**
  * Same as TypeTuple, but meant to be used with values.
@@ -179,6 +181,15 @@ template enumLength(T)
 
 deprecated alias EnumLength = enumLength;
 
+/// A range that iterates over all members of an enum.
+@property auto enumIota(T)() { return iota(T.init, enumLength!T); }
+
+unittest
+{
+	enum E { a, b, c }
+	static assert(equal(enumIota!E, [E.a, E.b, E.c]));
+}
+
 // ************************************************************************
 
 // http://d.puremagic.com/issues/show_bug.cgi?id=7805
@@ -216,6 +227,39 @@ static size_t findParameter()(string[] searchedNames, string soughtNames, string
 			return targetIndex;
 	}
 	assert(false, "No argument %s in %s's parameters (%s)".format(soughtNames, funName, searchedNames).idup);
+}
+
+/// Generates a function which passes its arguments to a struct, which is
+/// returned. Preserves field names (as parameter names) and default values.
+template structFun(S)
+{
+	string gen()
+	{
+		enum identifierAt(int n) = __traits(identifier, S.tupleof[n]);
+		enum names = [staticMap!(identifierAt, RangeTuple!(S.tupleof.length))];
+
+		return
+			"S structFun(\n" ~
+			S.tupleof.length.iota.map!(n =>
+			"	typeof(S.init.tupleof[%d]) %s = S.init.tupleof[%d],\n".format(n, names[n], n)
+			).join() ~
+			`) { return S(` ~ names.join(", ") ~ "); }";
+	}
+
+	mixin(gen());
+}
+
+unittest
+{
+	static struct Test
+	{
+		string a;
+		int b = 42;
+	}
+
+	Test test = structFun!Test("banana");
+	assert(test.a is "banana");
+	assert(test.b == 42);
 }
 
 // ************************************************************************
@@ -349,6 +393,12 @@ else
 	enum isDebug = false;
 
 deprecated alias IsDebug = isDebug;
+
+/// Is a specific version on?
+template isVersion(string versionName)
+{
+	mixin(`version (` ~ versionName ~ `) enum isVersion = true; else enum isVersion = false;`);
+}
 
 // ************************************************************************
 
