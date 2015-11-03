@@ -78,7 +78,8 @@ struct Image(COLOR)
 	COLOR[] scanline(int y)
 	{
 		assert(y>=0 && y<h);
-		return pixels[w*y..w*(y+1)];
+		auto start = w*y;
+		return pixels[start..start+w];
 	}
 
 	mixin DirectView;

@@ -1,7 +1,5 @@
 ﻿[![Build Status](https://travis-ci.org/p0nce/ae-graphics.png?branch=master)](https://travis-ci.org/p0nce/ae-graphics)
 
-**Tested compilers:** ![dmd-2.067.1](https://img.shields.io/badge/DMD-2.067.1-brightgreen.svg) ![dmd-2.066.1](https://img.shields.io/badge/DMD-2.066.1-brightgreen.svg) ![LDC-0.15.1](https://img.shields.io/badge/LDC-0.15.1-brightgreen.svg) ![GDC-4.9.2](https://img.shields.io/badge/GDC-4.9.2-brightgreen.svg)
-
 About this fork
 ===============
 
