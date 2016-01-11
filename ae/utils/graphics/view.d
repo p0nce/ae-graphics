@@ -647,10 +647,8 @@ unittest
 
 /// Return a view which applies a predicate over the
 /// underlying view's pixel colors.
-template colorMap(alias pred)
+template colorMap(alias fun)
 {
-	alias fun = unaryFun!(pred, false, "c");
-
 	auto colorMap(V)(auto ref V src)
 		if (isView!V)
 	{
@@ -676,7 +674,7 @@ template colorMap(alias pred)
 
 /// Returns a view which inverts all channels.
 // TODO: skip alpha and padding
-alias invert = colorMap!q{~c};
+alias invert = colorMap!(c => ~c);
 
 unittest
 {
@@ -691,9 +689,8 @@ unittest
 
 /// Returns the smallest window containing all
 /// pixels that satisfy the given predicate.
-template trim(alias pred)
+template trim(alias fun)
 {
-	alias fun = unaryFun!(pred, false, "c");
 
 	auto trim(V)(auto ref V src)
 	{
@@ -736,7 +733,7 @@ template trim(alias pred)
 	}
 }
 
-alias trimAlpha = trim!`c.a`;
+alias trimAlpha = trim!(c => c.a);
 
 // ***************************************************************************
 
